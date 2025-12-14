@@ -1,0 +1,304 @@
+{
+  "info": {
+    "_postman_id": "685ee20b-2327-4ac1-811d-8c74c462c937",
+    "name": "Insta-Clone",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register User",
+          "id": "f8e25097-6806-4d30-9681-971a73248289",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"username\": \"arnika\",\r\n  \"email\": \"arnika@gmail.com\",\r\n  \"password\": \"123456\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/users/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "users",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login User",
+          "id": "4ec6fb43-c3fa-4c7b-97da-736e056356aa",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"arnika@gmail.com\",\r\n  \"password\": \"123456\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "eaa9c616-749c-4e46-b9b3-00a14cc77266"
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get Profile",
+          "id": "a7af0f82-fd41-478c-9d5e-0ecf2b646b13",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "{{userId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Follow User",
+          "id": "210a485a-c610-46c9-8488-4ed9424e16b7",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "Unfollow User",
+          "id": "b99a3244-5359-47e3-863d-f6c53f38a5c1",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        }
+      ],
+      "id": "31675acd-4631-41d7-9575-9b1be4aa2732"
+    },
+    {
+      "name": "Posts",
+      "item": [
+        {
+          "name": "Create Post",
+          "id": "4a1e4c0a-2a72-4d53-bfc1-04bdedee3201",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"image\": \"https://picsum.photos/500\",\r\n  \"caption\": \"My first post\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/posts",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "posts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Feed",
+          "id": "5efd9938-3eb4-468f-af35-b2f7118fe1cc",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/posts/feed",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "posts",
+                "feed"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Single Post",
+          "id": "bb0f7e84-94e3-41dd-94f0-1ae9429f9899",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/posts/{{postId}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "posts",
+                "{{postId}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Like Post",
+          "id": "163f2b46-ca1c-471a-8889-a1d9ac00c2e7",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/posts/like/{{postId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "posts",
+                "like",
+                "{{postId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Unlike Post",
+          "id": "aeff9e32-17aa-4e93-b2e1-e597f344fe06",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/posts/unlike/{{postId}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "posts",
+                "unlike",
+                "{{postId}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Comment Post",
+          "id": "20794137-6282-48f1-a853-1ad2b8daebfe",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"text\": \"Nice post 👍\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/posts/comment/{{postId}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "posts",
+                "comment",
+                "{{postId}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "40b37cb2-2b7d-43d1-b330-609f96e6c9b5"
+    }
+  ]
+}
