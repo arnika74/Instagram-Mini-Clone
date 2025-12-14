@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const auth = require('../middleware/auth');
+const Post = require('../models/Post');
 
 // Register
 router.post('/register', async (req, res) => {
@@ -70,18 +71,6 @@ router.put('/unfollow/:id', auth, async (req, res) => {
     }
 });
 
-// Get logged-in user profile
-router.get('/me', auth, async (req, res) => {
-    try {
-        const user = await User.findById(req.user).select('-password');
-        const posts = await Post.find({ user: req.user });
-
-        res.json({ user, posts });
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-});
-
 // Get user profile + posts
 router.get('/:id', async (req, res) => {
     try {
@@ -97,17 +86,30 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// Get single post
-router.get('/:id', async (req, res) => {
-    try {
-        const post = await Post.findById(req.params.id)
-            .populate('user', 'username')
-            .populate('comments.user', 'username');
 
-        res.json(post);
+// Get logged-in user profile
+router.get('/me', auth, async (req, res) => {
+    try {
+        const user = await User.findById(req.user).select('-password');
+        const posts = await Post.find({ user: req.user });
+
+        res.json({ user, posts });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 });
+
+// // Get other user's profile
+// router.get('/:id', async (req, res) => {
+//     try {
+//         const user = await User.findById(req.params.id).select('-password');
+//         const posts = await Post.find({ user: req.params.id });
+
+//         res.json({ user, posts });
+//     } catch (err) {
+//         res.status(500).json({ error: err.message });
+//     }
+// });
+
 
 module.exports = router;

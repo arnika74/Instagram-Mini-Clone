@@ -46,4 +46,17 @@ router.get('/feed', auth, async (req, res) => {
     res.json(posts);
 });
 
+// Get single post
+router.get('/:id', async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.id)
+            .populate('user', 'username')
+            .populate('comments.user', 'username');
+
+        res.json(post);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 module.exports = router;
